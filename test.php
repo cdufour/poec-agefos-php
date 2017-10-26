@@ -1,15 +1,16 @@
 <?php
+include('lib/functions.php');
 ini_set('display_errors', 1); // erreurs affichées dans le navigateur
- ?>
+?>
 
 <p>Paragraphe</p>
 <?php
 
 // PHP est un langage à typage dynamique
-
 // TYPES SIMPLES
 $v = "bonjour"; // string
 echo $v;
+echo majusculeInitiale($v);
 echo gettype($v);
 
 $v = 14; // integer

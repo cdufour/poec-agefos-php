@@ -1,1 +1,16 @@
 Modifier le numéro de maillot du joueur Dybala : 10 => 21
+
+sous la balise h1
+Afficher les stagiaires sous forme d'un tableau html
+
+<table>
+  <tr>
+    <td>abecassis</td>
+    <td>stéphane</td>
+  <tr>
+</table>
+
+Ajouter une colonne "Notes" au tableau des stagiaires
+Pour chaque stagiaire, afficher la dernière note obtenue
+Si le stagiaire n'a obtenu aucune note, on affichera le message
+"aucune note"
