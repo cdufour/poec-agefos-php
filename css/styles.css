@@ -6,3 +6,19 @@ table {
 table img {
   height: 75px
 }
+
+.fail {
+  color: red
+}
+
+.erreur {
+  color: orange
+}
+
+.echec {
+  color: pink
+}
+
+.sconfitta {
+  color: brown
+}

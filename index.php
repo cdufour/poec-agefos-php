@@ -13,7 +13,7 @@ $stagiaires = array(
     'nom' => 'chauvet',
     'prenom' => 'stevens',
     'totem' => 'paresseux.jpg',
-    'notes' => array(4,20,10)),
+    'notes' => array(4,5,10)),
   array(
     'nom' => 'grivel',
     'prenom' => 'sébastien',
@@ -42,16 +42,27 @@ $stagiaires = array(
         <th>Prénom</th>
         <th>Nom</th>
         <th>Totem</th>
-        <th>Notes</th>
+        <th>Dernière note</th>
+        <th>Moyenne des notes</th>
       </tr>
       <?php
       foreach($stagiaires as $s) {
+        $moyenne = moyenne($s['notes'], 2);
+
         echo '<tr>';
         echo '<td>' . majusculeInitiale($s['prenom']) . '</td>';
         echo '<td>' . majusculeInitiale($s['nom']) . '</td>';
         echo '<td><img src="img/totems/' . $s['totem'] . '" alt=""/></td>';
         //echo '<td>' . $s['notes'][sizeof($s['notes']) - 1] . '</td>';
         echo '<td>' . derniereNote($s['notes']) . '</td>';
+
+        if ($moyenne < 10 && $moyenne != AUCUNE_NOTE_MSG) {
+          //echo '<td style="color:'.ERROR_COLOR.'">' . $moyenne . '</td>';
+          echo '<td class="'.ERROR_CLASS.'">' . $moyenne . '</td>';
+        } else {
+          echo '<td>' . $moyenne . '</td>';
+        }
+
         echo '</tr>';
       }
       ?>

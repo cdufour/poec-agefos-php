@@ -3,6 +3,14 @@ include('lib/functions.php');
 ini_set('display_errors', 1); // erreurs affichées dans le navigateur
 ?>
 
+<?php
+// test de la function moyenne()
+echo moyenne([8, 12], 2); // => 10
+echo moyenne([8, 12, 2], 2); // => 7.33
+echo moyenne([], 0); // => "Aucune note"
+
+?>
+
 <p>Paragraphe</p>
 <?php
 
