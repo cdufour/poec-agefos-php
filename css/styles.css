@@ -3,22 +3,15 @@ table {
   border:1px black solid;
 }
 
+th {
+  text-align: left
+}
+
 table img {
   height: 75px
 }
 
-.fail {
-  color: red
-}
-
-.erreur {
-  color: orange
-}
-
-.echec {
-  color: pink
-}
-
-.sconfitta {
-  color: brown
-}
+.fail {color: red}
+.erreur {color: orange}
+.echec {color: pink}
+.sconfitta {color: brown}

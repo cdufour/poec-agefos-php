@@ -1,7 +1,7 @@
 <?php
 define('AUCUNE_NOTE_MSG', 'Aucune note');
 define('ERROR_COLOR', '#FF6633');
-define('ERROR_CLASS', 'echec');
+define('ERROR_CLASS', 'fail');
 
 function majusculeInitiale($str) {
   // dans la version actuelle, les caractères accentués

@@ -14,3 +14,10 @@ Ajouter une colonne "Notes" au tableau des stagiaires
 Pour chaque stagiaire, afficher la dernière note obtenue
 Si le stagiaire n'a obtenu aucune note, on affichera le message
 "aucune note"
+
+
+Créer une fonction "moyenne" qui renvoie la moyenne de notes fournies
+en entrée de la fonction
+
+
+Afficher en rouge les moyennes inférieures à 10
