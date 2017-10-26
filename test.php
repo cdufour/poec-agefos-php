@@ -80,10 +80,10 @@ $juve[0]['maillot'] = 21;
 
 // Structures itératives
 // boucle for
-echo '<ul>';index
+echo '<ul>';
 for($i=0; $i<sizeof($juve); $i++) {
   echo '<li>' . $juve[$i]['prenom'] . ' ' . $juve[$i]['nom'] . '</li>';
-}index
+}
 echo '</ul>';
 
 // boucle while
@@ -98,7 +98,7 @@ echo '</select>';
 
 foreach($juve as $j) {
   if ($j['maillot'] == 21) {
-    echo '<p style="color:green">' . $j['nom'] . ' (meneur de jeu)</p>';
+    echo '<p style="color:red">' . $j['nom'] . ' (meneur de jeu)</p>';
   } else {
     echo '<p>' . $j['nom'] . '</p>';
   }
