@@ -1,7 +1,4 @@
 <?php
-define('AUCUNE_NOTE_MSG', 'Aucune note');
-define('ERROR_COLOR', '#FF6633');
-define('ERROR_CLASS', 'fail');
 
 function majusculeInitiale($str) {
   // dans la version actuelle, les caractères accentués
@@ -58,5 +55,14 @@ function moyenne($notes, $precision) {
 //   }
 // }
 
+function afficheStagiaireDetails($stagiaire) {
+  $output = '';
+  $output .= '<div class="stagiaire">';
+  $output .= '<h2>'.$stagiaire['nom'].'</h2>';
+  $output .= '<img src="'.ASSETS_PATH.'img/totems/' . $stagiaire['totem'] . '" alt=""/>';
+  $output .= '</div>';
+
+  return $output;
+}
 
 ?>

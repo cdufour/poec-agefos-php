@@ -1,0 +1,29 @@
+*** TP ***
+
+1. Augmenter le nombre de stagiaires dans la source de données afin
+d'avoir 10 stagiaires enregistrés. Ajouter-leur une clé "password"
+
+2. Placer sur toutes les pages du site, une barre latérale (sidebar) à droite.
+Cette barre latérale:
+- occupera 25% de la largeur éfcran
+- affichera les 3 stagiaires ayant la meilleure moyenne
+- ces 3 stagiaires seront triés de la moyenne la plus élevée la moins élevée
+- le meilleur aura une stylisation différente (impact visuel)
+
+3. Déplacer le menu de navigation dans un fichier à part (menu.php).
+Ce fichier devra être inclu aussi bien dans le header que dans le footer.
+La stylisation du menu de navigation variera par selon son emplacement.
+Exemple: taille de police, couleur différentes pour le menu placé dans le footer
+
+4. Ajouter une page login.php avec lien dans le menu de navigation
+Cette page affichera un formulaire avec les éléments suivants:
+- champ texte "Nom"m
+- Champ texte "Mot de passe"
+- bouton "Valider"
+A la validation, vérifier dans la source de données l'existence de la paire nom/mot de passe
+Si elle est trouvée: afficher un message "Bonjour {nom du stagiaire}, vous êtes connecté"
+Sinon : afficher le message "Stagiaire inconnu"
+
+5. Rendre les entêtes de colonne clicables.
+Un premier clic triera la colonne A-Z
+Un deuxième clic triera la colonne Z-A

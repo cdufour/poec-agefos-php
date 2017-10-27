@@ -7,7 +7,7 @@ $stagiaires = listeStagiaires();
 
 <?php include('header.php') ?>
     <h2>Liste des stagiaires</h2>
-    <table>
+    <table class="table table-striped table-bordered">
       <tr>
         <th>Prénom</th>
         <th>Nom</th>
@@ -21,8 +21,8 @@ $stagiaires = listeStagiaires();
 
         echo '<tr>';
         echo '<td>' . majusculeInitiale($s['prenom']) . '</td>';
-        echo '<td><a href="stagiaire_details.php?nom='.$s['nom'].'">' . majusculeInitiale($s['nom']) . '</a></td>';
-        echo '<td><img src="img/totems/' . $s['totem'] . '" alt=""/></td>';
+        echo '<td><a href="stagiaire_details.php?id='.$s['id'].'">' . majusculeInitiale($s['nom']) . '</a></td>';
+        echo '<td><img src="'.ASSETS_PATH.'img/totems/' . $s['totem'] . '" alt=""/></td>';
         //echo '<td>' . $s['notes'][sizeof($s['notes']) - 1] . '</td>';
         echo '<td>' . derniereNote($s['notes']) . '</td>';
 
