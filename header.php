@@ -9,12 +9,6 @@
   </head>
   <body>
     <h1>Formation PHP</h1>
-    <nav>
-      <ul class="nav nav-tabs">
-        <li><a href="index.php">Accueil</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      </ul>
-    </nav>
-
+    <?php include('menu.php'); ?>
     <div class="container">
      <div class="row">

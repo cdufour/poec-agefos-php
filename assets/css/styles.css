@@ -15,3 +15,12 @@ table img {
 .erreur {color: orange}
 .echec {color: pink}
 .sconfitta {color: brown}
+
+.best {
+  font-size: 1.2em;
+  color: orange
+}
+
+footer nav {
+  font-size: .75em;
+}

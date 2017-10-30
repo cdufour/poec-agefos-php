@@ -68,7 +68,7 @@ function afficheStagiaireDetails($stagiaire) {
 
 function meilleurStagiaire($stagiaires) {
   // @in: tableau des stagiaires
-  // @out: stagiaire ayant la meilleure moyenne + moyenne
+  // @out: stagiaire ayant la meilleure moyenne + moyenne + indice
   $meilleurMoyenne = moyenne($stagiaires[0]['notes'], 2); // le premier par défaut
   $meilleurStagiaire = NULL;
   $indice = NULL;
@@ -106,10 +106,18 @@ function meilleursStagiaires($stagiaires, $limit) {
   return $meilleursStagiaires;
 }
 
-function demo() {
-  $tab = ['Chris', 'test', 'Gab'];
-  array_splice($tab,1,1);
-  return $tab; // résultat attendu ['Chris', 'Gab']
+function verifieIdentite($info, $stagiaires) {
+  // @In info: superglobale $_POST
+  // @In stagiaires: source de données dans laquelle on recherche
+  // @Out bool (true ou false)
+  $found = false;
+  foreach($stagiaires as $s) {
+    if (($s['nom'] == $info['nom']) && ($s['password'] == $info['password'])) {
+      $found = true;
+      break;
+    }
+  }
+  return $found;
 }
 
 ?>
