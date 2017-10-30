@@ -4,6 +4,10 @@ https://github.com/cdufour/poec-agefos-php
 Installation lamp:
 sudo apt install apache2 php mysql-server libapache2-mod-php php-mysql
 
+Donner tous les droits sur dossier html:
+cd /var/www
+sudo chmod -R 777 html/
+
 Installation atom:
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
