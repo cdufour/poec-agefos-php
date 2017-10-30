@@ -6,7 +6,8 @@ $stagiaires = listeStagiaires();
 ?>
 
 <?php include('header.php') ?>
-    <h2>Liste des stagiaires</h2>
+  <h2>Liste des stagiaires</h2>
+  <div class="col-md-9">
     <table class="table table-striped table-bordered">
       <tr>
         <th>Prénom</th>
@@ -37,5 +38,10 @@ $stagiaires = listeStagiaires();
       }
       ?>
     </table>
+  </div>
+  <div class="col-md-3">
+    <?php include('sidebar.php'); ?>
+  </div>
+
 
 <?php include('footer.php') ?>

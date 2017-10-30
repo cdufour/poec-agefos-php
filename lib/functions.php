@@ -1,4 +1,5 @@
 <?php
+include_once('../datasource.php');
 
 function majusculeInitiale($str) {
   // dans la version actuelle, les caractères accentués
@@ -63,6 +64,52 @@ function afficheStagiaireDetails($stagiaire) {
   $output .= '</div>';
 
   return $output;
+}
+
+function meilleurStagiaire($stagiaires) {
+  // @in: tableau des stagiaires
+  // @out: stagiaire ayant la meilleure moyenne + moyenne
+  $meilleurMoyenne = moyenne($stagiaires[0]['notes'], 2); // le premier par défaut
+  $meilleurStagiaire = NULL;
+  $indice = NULL;
+
+  $i = 0;
+  foreach($stagiaires as $s) {
+    if (moyenne($s['notes'], 2) > $meilleurMoyenne) {
+      $meilleurMoyenne = moyenne($s['notes'], 2);
+      $meilleurStagiaire = $s;
+      $indice = $i;
+    }
+    $i++;
+  }
+  return array(
+    'stagiaire' => $meilleurStagiaire,
+    'moyenne' => $meilleurMoyenne,
+    'indice' => $indice
+  );
+
+}
+
+function meilleursStagiaires($stagiaires, $limit) {
+  // @In stagiaires: source de données
+  // @In limit: nombre de stagiaires à renvoyer
+  // @out: tableau de stagiaires + moyennes
+  $i = 0;
+  $meilleursStagiaires = array();
+  while ($i < $limit) {
+    $meilleur = meilleurStagiaire($stagiaires);
+    array_push($meilleursStagiaires, $meilleur);
+    array_splice($stagiaires, $meilleur['indice'], 1);
+    $i++;
+  }
+
+  return $meilleursStagiaires;
+}
+
+function demo() {
+  $tab = ['Chris', 'test', 'Gab'];
+  array_splice($tab,1,1);
+  return $tab; // résultat attendu ['Chris', 'Gab']
 }
 
 ?>
