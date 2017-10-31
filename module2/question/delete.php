@@ -14,7 +14,6 @@ if (isset($_GET['id'])) {
   } else {
     echo '<p>Suppression impossible</p>';
   }
-
 }
 
 ?>
