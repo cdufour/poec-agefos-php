@@ -24,7 +24,9 @@
       ));
 
       if ($result) {
-        echo '<p>Enregistrement réussi</p>';
+        //echo '<p>Enregistrement réussi</p>';
+        // redirection vers la liste des questions
+        header('location:?route=question/list');
       } else {
         echo '<p>L\'enregisrement a échoué</p>';
       }
