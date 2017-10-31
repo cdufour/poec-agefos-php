@@ -19,5 +19,10 @@ http://localhost/phpmyadmin => not found
 3/ service apache2 reload
 
 Plusieurs bibliothèques PHP peuvent intéragir avec MySQL
-mysqli (style procédural). Exemple: mysqli_connect();
-pdo (style oo) exemple: pdo->connect()
+mysqli (style procédural). Exemple: mysqli_fetch();
+pdo (style oo) exemple: pdo->fetch()
+
+
+// Afficher les erreurs
+cd /etc/php/7.0/apache2
+Modifier php.ini => display_errors = On
