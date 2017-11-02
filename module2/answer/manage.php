@@ -65,9 +65,16 @@ if (isset($_POST['submit'])) {
                 &nbsp;réponse
               </td>
               <td>
+                <?php
+                  $url = '?route=answer/delete&id_answer=' . $answer->id;
+                  $url .= '&id_question=' . $id_question;
+                ?>
+                <a
+                  class="btn btn-default btn-xs"
+                  href="">Modifier</a>
                 <a
                   class="btn btn-danger btn-xs"
-                  href="?route=answer/delete&id=<?= $answer->id ?>">Supprimer</a>
+                  href="<?= $url ?>">Supprimer</a>
               </td>
             </tr>
           <?php endforeach ?>

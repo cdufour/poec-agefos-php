@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2017 at 05:18 PM
+-- Generation Time: Nov 02, 2017 at 04:57 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `quizz`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer`
+--
+
+CREATE TABLE `answer` (
+  `id` int(11) NOT NULL,
+  `body` text NOT NULL,
+  `correct` tinyint(1) NOT NULL,
+  `id_question` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`id`, `body`, `correct`, `id_question`) VALUES
+(1, 'Fès', 0, 10),
+(2, 'Casablanca', 0, 10),
+(3, 'Rabat', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -40,7 +62,7 @@ CREATE TABLE `question` (
 INSERT INTO `question` (`id`, `title`, `category`, `level`) VALUES
 (8, 'Quelle est le prénom du président Macron ?', 'Politique', 1),
 (10, 'Quelle est la capitale du Maroc ?', 'Divers', 1),
-(11, 'Qui est l\'acteur principal du fim Titanic ?', 'Divers', 2),
+(11, 'Qui est l\'acteur principal du fim Titanic de Cameron ?', 'Cinéma', 2),
 (12, 'Qui a écrit "Le Prophète" ?', 'Littérature', 2);
 
 -- --------------------------------------------------------
@@ -69,6 +91,12 @@ INSERT INTO `stagiaire` (`id`, `nom`, `prenom`) VALUES
 --
 
 --
+-- Indexes for table `answer`
+--
+ALTER TABLE `answer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `question`
 --
 ALTER TABLE `question`
@@ -84,6 +112,11 @@ ALTER TABLE `stagiaire`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `answer`
+--
+ALTER TABLE `answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `question`
 --
