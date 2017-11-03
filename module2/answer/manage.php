@@ -100,8 +100,10 @@ if (isset($_POST['update'])) {
       <?php else: ?>
         <h3>Liste des réponses</h3>
         <table class="table table-bordered table-striped">
+          <?php $i = 0; // compteur  ?>
           <?php foreach($answers as $answer): ?>
             <tr>
+              <td><?=++$i?></td>
               <td><?=$answer->body ?></td>
               <td>
                 <?= ($answer->correct == 1) ? 'Bonne' : 'Mauvaise'; ?>
@@ -166,7 +168,19 @@ if (isset($_POST['update'])) {
         </div>
         <input type="hidden" name="id_question" value="<?=$id_question?>">
         <input type="hidden" name="id_answer" value="<?= $answerEdit->id ?>">
-        <input type="submit" name="update" value="Mettre à jour">
+        <input
+          class="btn btn-primary"
+          type="submit" name="update" value="Mettre à jour">
+        <?php
+          $url = '?route=answer/manage&id_question=' . $id_question;
+        ?>
+        <!--
+        le lien annuler permet de quitter le mode édition:
+        les paramètres "edit" et "id_answer" ne sont plus dans l'url
+        -->
+        <a
+          class="btn btn-default"
+          href="<?=$url?>">Annuler</a>
       </form>
 
     <?php endif ?>
