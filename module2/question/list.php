@@ -16,7 +16,17 @@ function getNumAnswers($db, $id_question) {
 }
 
 // 1. preparation de la requête
-$query = $db->prepare('SELECT * FROM question ORDER BY id DESC');
+//$query = $db->prepare('SELECT * FROM question ORDER BY id DESC');
+// La jointure permet de récupéer des informations situées
+// dans des tables différentes. La clé de jointure 'ON' exclut les lignes
+// qui ne vérifient l'égalité question.category = category.id
+$query = $db->prepare(
+  ' SELECT question.id, question.title, question.level, category.name AS category
+    FROM question
+    JOIN category ON question.category = category.id
+    ORDER BY question.id DESC
+  '
+);
 
 // 2. exécution
 $query->execute();
