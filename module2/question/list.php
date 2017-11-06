@@ -1,4 +1,6 @@
 <?php
+include './levels.php';
+
 // fonction retournant le nombre de réponses associées à une question
 function getNumAnswers($db, $id_question) {
   // on fournit $db en entrée de la function afin qu'elle puisse
@@ -39,7 +41,7 @@ $questions = $query->fetchAll(PDO::FETCH_OBJ);
       <td><?= ++$i ?></td>
       <td><?= $question->title ?></td>
       <td><?= $question->category ?></td>
-      <td><?= $question->level ?></td>
+      <td><?= getLevelName($levels, $question->level) ?></td>
       <td>
         <a
           href="?route=answer/manage&id_question=<?= $question->id ?>"

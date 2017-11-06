@@ -6,7 +6,6 @@ $routes = array(
   'question/delete' => 'question/delete.php',
   'question/edit' => 'question/edit.php',
   'answer/manage' => 'answer/manage.php',
-  'answer/add' => 'answer/add.php',
-  'answer/delete' => 'answer/delete.php'
+  'category/manage' => 'category/manage.php',
 );
 ?>

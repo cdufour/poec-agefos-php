@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 03, 2017 at 01:04 PM
+-- Generation Time: Nov 06, 2017 at 11:27 AM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -23,35 +23,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answer`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `answer` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `body` text NOT NULL,
-  `correct` tinyint(1) NOT NULL,
-  `id_question` int(11) NOT NULL
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `answer`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `answer` (`id`, `body`, `correct`, `id_question`) VALUES
-(1, 'Fès', 0, 10),
-(3, 'Rabat', 1, 10),
-(8, 'Dany Boon', 0, 11),
-(9, 'Paris', 0, 10),
-(10, 'Paris', 0, 10);
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Sport'),
+(2, 'Politique'),
+(5, 'Art'),
+(7, 'Programmation'),
+(8, 'Histoire');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `answer`
+-- Indexes for table `category`
 --
-ALTER TABLE `answer`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -59,10 +57,10 @@ ALTER TABLE `answer`
 --
 
 --
--- AUTO_INCREMENT for table `answer`
+-- AUTO_INCREMENT for table `category`
 --
-ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

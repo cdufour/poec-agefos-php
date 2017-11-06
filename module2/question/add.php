@@ -1,5 +1,6 @@
 <?php
 include('categories.php'); // accès à la variable $categories
+$categories = getCategories($db);
 
 if (isset($_POST['submit'])) {
   //var_dump($_POST);
@@ -20,7 +21,7 @@ if (isset($_POST['submit'])) {
     // intval convertit la valeur en entier
     $result = $query->execute(array(
       ':title'      => $_POST['title'],
-      ':category'   => $_POST['category'],
+      ':category'   => intval($_POST['category']),
       ':level'      => intval($_POST['level'])
     ));
 
@@ -51,7 +52,7 @@ if (isset($_POST['submit'])) {
     <select name="category">
       <option value="0">Choisir une catégorie</option>
       <?php foreach($categories as $category): ?>
-        <option><?= $category ?></option>
+        <option value="<?=$category->id ?>"><?= $category->name ?></option>
       <?php endforeach ?>
     </select>
   </div>
