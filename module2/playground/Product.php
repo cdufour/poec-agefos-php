@@ -1,9 +1,15 @@
 <?php
 
 class Product {
-  private $price = NULL;
+  // constante de classe
+  const CONSTANTE_DE_CLASSE = "Je suis un constante de classe";
+  
+  private $price = 99.99;
   private $available = false;
   private $name = NULL;
+
+  public $test = "public test Product";
+  protected $test2 = "protect test2 Product";
 
   // constructeur
   public function __construct($name) {

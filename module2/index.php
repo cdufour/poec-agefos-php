@@ -21,6 +21,7 @@ if (isset($_GET['route'])) {
           <li><a href="?route=question/list">Liste des questions</a></li>
           <li><a href="?route=question/add">Ajouter une question</a></li>
           <li><a href="?route=category/manage">Catégories</a></li>
+          <li><a href="?route=qcm">QCM</a></li>
         </ul>
       </nav>
     </header>

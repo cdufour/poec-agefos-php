@@ -66,17 +66,27 @@ $color2 = new Color("orange");
 $product1 = new Product("Tondeuse à gazon");
 $product1->setPrice(14.6);
 $product1->setAvailable(true);
-var_dump($product1);
+//var_dump($product1);
+//echo $product1->test;
+//echo $product1->test2;
+//echo $product1->CONSTANTE_DE_CLASSE; IMPOSSIBLE !!!!!!!!!!
+//echo Product::CONSTANTE_DE_CLASSE;
+echo '<p></p>';
 
 $book1 = new Book("Le Père Goriot");
-$book1->setPrice(5.40);
+//$book1->setPrice(5.40);
 $book1->setNbPages(450);
-var_dump($book1);
+//var_dump($book1);
+//echo $book1->getPrice();
+//echo $book1->test;
+//echo $book1->test2; // Fatal ERROR (propriété protégée)
+//echo $book1->getTest2();
+echo '<p></p>';
 
 $weapon1 = new Weapon("Pic à glace");
 $weapon1->setPrice(60);
 $weapon1->setCategory(6);
-var_dump($weapon1);
+//var_dump($weapon1);
 
 
 ?>

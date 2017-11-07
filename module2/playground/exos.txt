@@ -1,11 +1,11 @@
 *** EXOS ***
 
 Ajouter à la classe Color une méthode convertToRgb
-qui renverra la version rgb de la couleur défini en langue
-humaine lors de l'instantiation
+qui renverra la version rgb de la couleur définie en langue
+humaine lors de l'instanciation
 
 Exemple d'utilisation:
 $color1->convertToRgb() // renvoie '255, 0, 0' si $color1 a reçu "red"
 
 
-Permettre dès l'instantiation de donner un nom aux objets Product
+Permettre dès l'instanciation de donner un nom aux objets Product
