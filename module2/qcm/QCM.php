@@ -45,9 +45,19 @@ class QCM {
   }
 
   public function generate() {
+    // La jointure interne JOIN renverra nécessairement
+    // des questions possèdant des réponses
+    // les questions sans réponse seront exclues
+    // la jointure interne est restrictive (à la différence
+    // des jointures externes (LEFT JOIN et RIGHT JOIN)
+    // qui, elles, peuvent retourner des éléments sans
+    // qu'une table ait de correspondance dans l'autre)
+
     $query = $this->db->prepare
-    ('SELECT *
+    ('SELECT question.title, answer.body,
+      answer.id_question, answer.id AS id_answer
       FROM question
+      JOIN answer ON question.id = answer.id_question
       WHERE category = :category
       AND level = :level
     ');

@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $_POST['nb_questions']
   );
 
-  var_dump($qcm->generate());
+  $questions = $qcm->generate();
 
 }
 ?>
