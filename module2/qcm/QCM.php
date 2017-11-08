@@ -72,7 +72,13 @@ class QCM {
     $query->bindValue(':level', $this->getLevel(), PDO::PARAM_INT);
     $query->execute();
 
-    return $this->transformData($query->fetchAll(PDO::FETCH_OBJ));
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    if (sizeof($results) > 0) {
+      return $this->transformData($results);
+    } else {
+      return false;
+    }
+
   }
 
   private function transformData($rows) {

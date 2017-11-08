@@ -22,6 +22,7 @@ class Question {
     return;
   }
 
+  public function getId() {return $this->id;}
   public function getTitle() {return $this->title;}
 
   public function getAnswers() {return $this->answers;}
