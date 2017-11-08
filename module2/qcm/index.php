@@ -15,6 +15,9 @@ if (isset($_POST['submit'])) {
   );
 
   $questions = $qcm->generate();
+  echo '<pre>';
+  print_r($questions);
+  echo '</pre>';
 
 }
 ?>

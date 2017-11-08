@@ -1,4 +1,7 @@
 <?php
+include_once ('Question.php');
+include_once ('Answer.php');
+
 class QCM {
   private $db = NULL;
   private $category = NULL;
@@ -54,8 +57,9 @@ class QCM {
     // qu'une table ait de correspondance dans l'autre)
 
     $query = $this->db->prepare
-    ('SELECT question.title, answer.body,
-      answer.id_question, answer.id AS id_answer
+    ('SELECT question.title, question.category, question.level,
+      answer.body, answer.correct, answer.id_question,
+      answer.id AS id_answer
       FROM question
       JOIN answer ON question.id = answer.id_question
       WHERE category = :category
@@ -67,8 +71,42 @@ class QCM {
     $query->bindValue(':level', $this->getLevel(), PDO::PARAM_INT);
     $query->execute();
 
-    return $query->fetchAll(PDO::FETCH_OBJ);
+    return $this->transformData($query->fetchAll(PDO::FETCH_OBJ));
   }
+
+  private function transformData($rows) {
+    // fonction destinées à transformer les données (lignes)
+    // reçues par la méthode generate() en tableau
+    // d'objets Question. Chaque objet Question
+    // contiendra un tableau d'objets Answer
+    $questions = [];
+    $id_question = $rows[0]->id_question; // id de la première question
+    $question = new Question(NULL, NULL, NULL, NULL);
+    $i = -1; // indice permettant d'insérer une question "au bon endroit"
+    // dans le tableau des questions
+    $firstQuestion = true;
+
+    foreach($rows as $row) {
+      $answer = new Answer(
+        $row->id_answer, $row->body, $row->correct, $row->id_question);
+
+      if ($row->id_question != $id_question || $firstQuestion) {
+        $i++;
+        // changement de question
+        $question = new Question(
+          $row->id_question, $row->title, $row->category, $row->level);
+
+        $questions[$i] = $question;
+
+        $id_question = $row->id_question;
+        $firstQuestion = false;
+      }
+      $questions[$i]->addAnswer($answer);
+    }
+    return $questions;
+
+  }
+
 
 }
 
