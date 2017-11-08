@@ -7,6 +7,8 @@ class QCM {
   private $category = NULL;
   private $level = NULL;
   private $nb_questions = NULL;
+  private $questions = array(); // permet de stocker les résultats de la
+  // méthode generate
 
   public function __construct($db, $category, $level, $nb_questions) {
     $this->setDb($db);
@@ -24,6 +26,9 @@ class QCM {
   }
   public function getNbQuestions() {
     return $this->nb_questions;
+  }
+  public function getQuestions() {
+    return $this->questions;
   }
 
   // setters
@@ -45,6 +50,10 @@ class QCM {
   public function setNbQuestions($nb_questions) {
     $this->nb_questions = $nb_questions;
     return $this->nb_questions;
+  }
+  private function setQuestions(array $questions) {
+    $this->questions = $questions;
+    return $this->questions;
   }
 
   public function generate() {
@@ -74,7 +83,8 @@ class QCM {
 
     $results = $query->fetchAll(PDO::FETCH_OBJ);
     if (sizeof($results) > 0) {
-      return $this->transformData($results);
+      $resultsTransformed =  $this->transformData($results);
+      return $this->setQuestions($resultsTransformed);
     } else {
       return false;
     }
@@ -111,6 +121,36 @@ class QCM {
       $questions[$i]->addAnswer($answer);
     }
     return $questions;
+
+  }
+
+  public function processChoices($choices) {
+
+    //$results = 0;
+    foreach($this->getQuestions() as $question) {
+      $question_id = strval($question->getId()); // 14 => "14"
+
+      // cette variable correspond au tableau de réponses
+      // cochées par le client
+      $client_answers = $choices[$question_id]; // choices["14"];
+
+      // boucle sur les réponses du client
+      foreach($client_answers as $client_answer) {
+        echo 'id question: ' . $question_id;
+        echo ', id réponse: ' . $client_answer . '<br />';
+
+        // comparaison avec le tableau des réponses contenu dans la question
+        foreach ($question->getAnswers() as $answer) {
+          if ($answer->getId() == intval($client_answer)) {
+            if ($answer->getCorrect() == 1) {
+              echo 'bonne réponse !';
+            }
+          }
+        }
+      }
+
+
+    }
 
   }
 

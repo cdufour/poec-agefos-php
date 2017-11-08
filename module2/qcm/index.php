@@ -23,7 +23,21 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['validate'])) {
-  var_dump($_POST);
+  //var_dump($_POST);
+  // on reconstitue l'objet $qcm "perdu" en raison de la nouvelle
+  // requête HTTP
+  $qcm = new QCM(
+    $db,
+    $_POST['category'],
+    $_POST['level'],
+    $_POST['nb_questions']
+  );
+
+  $questions = $qcm->generate();
+  
+  $qcm->processChoices($_POST);
+
+
 }
 
 ?>
