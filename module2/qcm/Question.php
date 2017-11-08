@@ -22,9 +22,9 @@ class Question {
     return;
   }
 
-  public function getAnswers() {
-    return $this->answers;
-  }
+  public function getTitle() {return $this->title;}
+
+  public function getAnswers() {return $this->answers;}
 }
 
 ?>

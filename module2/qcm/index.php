@@ -15,10 +15,9 @@ if (isset($_POST['submit'])) {
   );
 
   $questions = $qcm->generate();
-  echo '<pre>';
-  print_r($questions);
-  echo '</pre>';
-
+  // echo '<pre>';
+  // print_r($questions);
+  // echo '</pre>';
 }
 ?>
 
@@ -51,3 +50,23 @@ if (isset($_POST['submit'])) {
   <input type="submit" name="submit" value="Générer">
 
 </form>
+
+<div>
+
+<?php if (isset($_POST['submit'])): ?>
+
+  <?php foreach($questions as $question): ?>
+    <div>
+      <h4><?= $question->getTitle(); ?></h4>
+      <?php foreach($question->getAnswers() as $answer): ?>
+        <div>
+          <input type="checkbox">
+          <?= $answer->getBody(); ?>
+        </div>
+      <?php endforeach ?>
+    </div>
+  <?php endforeach ?>
+
+<?php endif ?>
+
+</div>

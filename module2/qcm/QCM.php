@@ -64,6 +64,7 @@ class QCM {
       JOIN answer ON question.id = answer.id_question
       WHERE category = :category
       AND level = :level
+      ORDER BY question.id ASC
     ');
     // la méthode bindValue est une autre façon d'associer des valeurs
     // aux placeholders (binding)
@@ -106,7 +107,6 @@ class QCM {
     return $questions;
 
   }
-
 
 }
 
