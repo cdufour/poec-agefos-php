@@ -6,6 +6,8 @@
 - Author
 
 Créer une nouvelle base de données: biblio
+Mettre les fichiers de l'application dans un dossier "biblio" (à créer
+à la racine de html)
 
 Ces entités devront être modélisées en Objets (création de classe);
 
