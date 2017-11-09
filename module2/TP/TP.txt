@@ -1,4 +1,4 @@
-*** TP ***
+*** TP 2 ***
 
 1. Créer une interface de gestion des catégories permettant
 les opérations CRUD. L'utilisateur pourra:

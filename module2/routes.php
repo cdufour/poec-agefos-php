@@ -7,6 +7,8 @@ $routes = array(
   'question/edit' => 'question/edit.php',
   'answer/manage' => 'answer/manage.php',
   'category/manage' => 'category/manage.php',
-  'qcm' => 'qcm/index.php'
+  'qcm' => 'qcm/index.php',
+  'login' => 'login/index.php',
+  'logout' => 'login/logout.php',
 );
 ?>

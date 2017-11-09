@@ -1,0 +1,29 @@
+*** TP 3 ***
+
+1. Créer une petite application "Biblio App" gérant deux entités:
+
+- Book
+- Author
+
+Créer une nouvelle base de données: biblio
+
+Ces entités devront être modélisées en Objets (création de classe);
+
+Propriété d'un "book":
+- id, title, isbn, nb_pages, author
+
+Proprités d'un "author":
+- id, firstname, lastname, birth_year, country
+
+L'application permettra :
+- d'enregistrer en base de données des "books" et des "authors"
+- d'afficher une liste des "books" où devront figurer au moins
+les colonnes suivantes: book.title et author.lastname
+- de supprimer un "book"
+
+2. Bonus
+Créer un système de réservation de livre. Proposer un bouton "Réserver"
+dans la tableau des livres. Si le "book" est disponible (ajouter cette
+propriété à la classe Book), le système changer l'état du "book" qui passera
+à "indisponible" (gérer éventuellement une date de retour, exemple:
+"indisponible jusqu'au 9 décembre 2017")

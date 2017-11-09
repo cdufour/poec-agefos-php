@@ -125,36 +125,62 @@ class QCM {
   }
 
   public function processChoices($choices) {
+    // $choices reçoit $_POST
+    $results = 0; // variable servant au cumul DES bonnes réponses
+    $result = 0; // variable servant à recevoir le résultat
+    // de l'évaluation d'UNE question
 
-    //$results = 0;
+    // Boucle de niveau 1, on parcourt le tableau des questions
     foreach($this->getQuestions() as $question) {
       $question_id = strval($question->getId()); // 14 => "14"
+      // conversion de l'id en chaîne de caractère afin d'établir
+      // la correspondance avec la clé dans le tableau associatif $choices
 
       // cette variable correspond au tableau de réponses
       // cochées par le client
       $client_answers = $choices[$question_id]; // choices["14"];
+      // exemple de contenu pour la variable $client_answers:
+      // array(15, 16) où 15 et 16 sont des identifiants de réponses
+      // il s'agit des cases que le client à cocher
 
-      // boucle sur les réponses du client
+
+      // boucle de niveau 2, on parcourt les réponses du client
       foreach($client_answers as $client_answer) {
-        echo 'id question: ' . $question_id;
-        echo ', id réponse: ' . $client_answer . '<br />';
+        // exemple: $client_answer vaudra au premier passage: 15
+        // exemple: $client_answer vaudra au deuxième passage: 16
 
-        // comparaison avec le tableau des réponses contenu dans la question
+        // boucle de niveau 3, on parcourt le tableau complet de réponses
+        // associées à la question traitée (boucle de niveau 1)
+        // exemple: si la question d'id 14 contient un tableau de 4
+        // réponses possible, cette boucle de niveau 3 fera 4 passages
+        // on compare l'ensemble des réponses possibles
+        // avec les réponses choisies par le client
         foreach ($question->getAnswers() as $answer) {
           if ($answer->getId() == intval($client_answer)) {
+            // on vérifie que la réponse est correcte
             if ($answer->getCorrect() == 1) {
-              echo 'bonne réponse !';
+              $result++;
+            } else {
+              // si la réponse est mauvaise, on décremente la variable $result
+              // "on enlève un point"
+              $result--;
             }
           }
-        }
-      }
+        } // fin de la boucle de niveau 3
+      } // fin de la boucle de niveau 2
+      // afin de ne pas fausser le résultat final, il faut éviter une valeur
+      // pontentiellement négatif, on met à 0 $result si sa valeur est négative
+      if ($result < 0) $result = 0;
+      $results += $result; // on ajoute à results (variable de cumul)
+      // le résultat obtenu pour la question qu'on vient de traiter
+      $result = 0; // réinitialisation de la variable afin de la rendre
+      // opérationnelle pour la question suivante
 
+    } // fin de la boucle de niveau 1
+    return $results;
+  } // fin de la méthode processChoices
 
-    }
-
-  }
-
-}
+} // fin de la classe QCM
 
 
 ?>

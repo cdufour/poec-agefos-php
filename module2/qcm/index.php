@@ -33,11 +33,9 @@ if (isset($_POST['validate'])) {
     $_POST['nb_questions']
   );
 
-  $questions = $qcm->generate();
-  
-  $qcm->processChoices($_POST);
-
-
+  $questions = $qcm->generate(); // génération du formulaire
+  $results = $qcm->processChoices($_POST); // traitement des choix client
+  echo '<p>Vous avez obtenu <b>' . $results . '</b> bonne(s) réponse(s)</p>';
 }
 
 ?>
@@ -89,6 +87,14 @@ if (isset($_POST['validate'])) {
       <h4><?= $question->getTitle(); ?></h4>
       <?php foreach($question->getAnswers() as $answer): ?>
         <div>
+          <!--
+          donner à l'attribut html value un nom avec crochets
+          exemple: test[] permet d'associer à ce nom un tableau de valeurs
+          sans crochet (exemple: test), si plusieurs input partage un nom,
+          le dernier input cochée/sélectionnée/etc écrase la valeur précédente
+          Les valeurs multiples sont automiquement gérées par PHP qui les insére
+          dans la super-globale POST
+         -->
           <input
             name="<?= $question->getId() ?>[]"
             value="<?= $answer->getId()?>"
