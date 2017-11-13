@@ -49,6 +49,27 @@ class AuthorManager {
     return $result;
   }
 
+  public function getById($id) {
+    $query = $this->db->prepare('SELECT * FROM author WHERE id = :id');
+    $query->execute(array(':id' => $id));
+    $result = $query->fetch(PDO::FETCH_OBJ);
+
+    // transformation de l'objet PDO $result en objet de type Author
+    $author = new Author(
+      $result->firstname,
+      $result->lastname,
+      $result->birth_year,
+      $result->country
+    );
+    $author->setId($result->id); // hydratation complète
+    return $author;
+  }
+
+  public function getBooks($author_id) {
+    // A faire
+    // renvoie un tableau d'objets Book
+  }
+
 }
 
 ?>
