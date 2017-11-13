@@ -5,6 +5,7 @@ include_once('./author/AuthorManager.php');
 // objet permettant les opérations en BD
 $author_manager = new AuthorManager($db);
 
+// ajout d'un auteur
 if (isset($_POST['submit'])) {
   // création d'un objet Author à partir des données postées
   $author = new Author(
@@ -19,6 +20,20 @@ if (isset($_POST['submit'])) {
   if($author_manager->save($author) == 0)
     echo 'Echec de l\'enregistrement';
 }
+
+// actions sur auteur
+if (isset($_GET['action'])) {
+  $action = $_GET['action'];
+  $author_id = intval($_GET['id']);
+
+  // suppression
+  if ($action == 'delete') {
+    if ($author_manager->deleteById($author_id) == 0)
+      echo 'La suppression a échoué';
+  }
+}
+
+$authors = $author_manager->list();
 ?>
 <h2>Auteurs</h2>
 
@@ -45,3 +60,28 @@ if (isset($_POST['submit'])) {
   <input type="submit" name="submit" value="Enregistrer">
 
 </form>
+
+<!-- liste des auteurs -->
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Année de naissance</th>
+    <th>Pays</th>
+    <th>Actions</th>
+  </tr>
+  <?php foreach($authors as $author): ?>
+    <tr>
+      <td><?= $author->getFirstname() ?></td>
+      <td><?= $author->getLastname() ?></td>
+      <td><?= $author->getBirthYear() ?></td>
+      <td><?= $author->getCountry() ?></td>
+      <td>
+        <a
+          class="btn btn-danger btn-xs"
+          href="?route=authors&action=delete&id=<?= $author->getId() ?>">
+          Supprimer</a>
+      </td>
+    </tr>
+  <?php endforeach ?>
+</table>
