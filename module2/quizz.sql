@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2017 at 01:02 PM
+-- Generation Time: Nov 13, 2017 at 05:07 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -48,7 +48,10 @@ INSERT INTO `answer` (`id`, `body`, `correct`, `id_question`) VALUES
 (13, '162cm', 1, 12),
 (14, 'Leonardo Di Caprio', 1, 11),
 (15, 'Brad Pitt', 0, 11),
-(16, 'Jamel Debbouze', 0, 11);
+(16, 'Jamel Debbouze', 0, 11),
+(17, 'Oui', 0, 13),
+(18, 'Non', 1, 13),
+(19, 'dgfdgfdsg', 0, 2500);
 
 -- --------------------------------------------------------
 
@@ -94,7 +97,9 @@ INSERT INTO `question` (`id`, `title`, `category`, `level`) VALUES
 (8, 'Quel est le prénom du président Macron ?', 2, 1),
 (10, 'Quelle est la capitale du Maroc ?', 9, 1),
 (11, 'Qui est l\'acteur principal du film Titanic de Cameron ?', 2, 2),
-(12, 'Combien mesure Nicolas Sarkozy ?', 2, 1);
+(12, 'Combien mesure Nicolas Sarkozy ?', 2, 1),
+(13, 'La Catalogne est-elle un Etat indépendant ?', 2, 2),
+(14, 'Quel est le parti politique le plus attrayant en France ?', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -153,7 +158,7 @@ ALTER TABLE `stagiaire`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -163,7 +168,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `stagiaire`
 --
