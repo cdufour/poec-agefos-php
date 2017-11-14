@@ -1,0 +1,18 @@
+*** EXOS ***
+
+A l'intérieur de TestController, ajouter une route '/fruits/list'
+qui renverra au client la liste des fruits
+
+Au niveau du template fruits.html.twig,
+Pour l'affichage du tableau fruits3,
+Afficher "Dangereux" si le fruit n'est pas comesible,
+sinon afficher "Aucun risque connu"
+
+Pour chaque fruit du tableau $fruits3, ajouter une propriété
+"wiki" qui contiendra l'url de la page wikipedia concernant ce fruit
+ou bien la valeur NULL si aucun article existe
+Au niveau du template, si la propriété wiki n'est pas nulle, afficher
+un lien renvoyant vers l'article
+
+
+Styliser en boostrap les tableaux du template fruits.html.twig
