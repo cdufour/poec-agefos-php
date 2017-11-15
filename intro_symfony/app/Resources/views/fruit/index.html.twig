@@ -18,4 +18,33 @@
     <input type="submit" name="submit" value="Enregisrer">
   </form>
 
+  <hr>
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Nom</th>
+      <th>Origine</th>
+      <th>Comestible</th>
+      <th>Actions</th>
+    </tr>
+    {% for f in fruits %}
+      <tr>
+        <td>{{ f.name }}</td>
+        <td>{{ f.origin }}</td>
+        <td>
+          {% if f.comestible == 1 %}
+            oui
+          {% else %}
+            non
+          {% endif %}
+        </td>
+        <td>
+          <a
+            class="btn btn-danger btn-xs"
+            href="{{ path('fruit_delete', {'id': f.id}) }}">Supprimer</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
 {% endblock %}

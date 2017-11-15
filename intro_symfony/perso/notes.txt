@@ -4,8 +4,9 @@ Etapes d'installation de l'application intro_symfony
 1. Se placer dans un dossier quelconque de votre ordinateur (exemple: Bureau)
 2. git clone https://github.com/cdufour/poec-agefos-php.git
 3. se placer dans le dossier intro_symfony
-4. Utiliser composer pour télécharger les dépendances (/vendor): composer install
-N.B : si composer n'est pas présent : sudo apt install composer
+4. Executer la commande: composer install pour télécharger les dépendances
+
+(N.B : si composer n'est pas présent : sudo apt install composer)
 
 Durant la procédure de téléchargement des dépendances, ignorer les questions de composer
 concernant la database (appuyer sur Entrée systématiquement)
