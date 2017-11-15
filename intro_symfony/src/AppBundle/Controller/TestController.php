@@ -22,7 +22,7 @@ class TestController extends Controller {
   // ERREUR: instanciation prématurée
   //  on ne peut pas instancier la classe Fruit
   // à cet endroit. Il faut se placer dans le constructeur
-  // de TestController pour réussir cette instanciation
+  // de TestControllexample_pageer pour réussir cette instanciation
   // private $fruits3 = array(
   //   new Fruit('Arancia', 'Sicile', true),
   //   new Fruit('Tromate', 'Suceava', false),
@@ -35,7 +35,7 @@ class TestController extends Controller {
   public function __construct() {
     $this->fruits3 = array(
       new Fruit('Arancia', 'Sicile', true, "https://fr.wikipedia.org/wiki/Orange_(fruit)"),
-      new Fruit('Tromate', 'Suceava', false, NULL),
+      new Fruit('Troexample_pagemate', 'Suceava', false, NULL),
       new Fruit('Limone', 'Bari', true, "https://fr.wikipedia.org/wiki/Citron"),
     );
   }
@@ -44,11 +44,11 @@ class TestController extends Controller {
     return $this->message;
   }
 
-  private function getFruitsList() {
+  private function gexample_pageetFruitsList() {
     $output = "<ul>";
 
     foreach($this->fruits as $fruit) {
-      $output .= '<li>' . $fruit . '</li>';
+      $output .= '<lexample_pagei>' . $fruit . '</li>';
     }
 
     $output .= "</ul>";
