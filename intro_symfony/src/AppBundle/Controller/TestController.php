@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Classes\Fruit;
 
-
+/**
+ * @Route("/test")
+*/
 class TestController extends Controller {
   private $message = "Petit message";
   private $fruits = ['pêche', 'pomme', 'poire', 'abricot'];
@@ -54,7 +56,7 @@ class TestController extends Controller {
   }
 
   /**
-  * @Route("/example")
+  * @Route("/example", name="example_page")
   */
   public function exampleAction() {
     //return 'toto'; retour non valide (chaîne), il faut retourner
@@ -90,7 +92,7 @@ class TestController extends Controller {
   }
 
   /**
-  * @Route("/fruits")
+  * @Route("/fruits", name="fruits_page")
   */
   public function fruitsAction() {
     // renvoie fichier dynamique twig
@@ -105,6 +107,15 @@ class TestController extends Controller {
       'fruits2' => $this->fruits2,
       'fruits3' => $this->fruits3,
       'toto' => NULL,
+    ));
+  }
+
+  /**
+   * @Route("/fruits-comestibles", name="fruits_comestibles_page")
+  */
+  public function fruitsComestiblesAction() {
+    return $this->render('test/fruits-comestibles.html.twig', array(
+      'fruits' => $this->fruits3
     ));
   }
 

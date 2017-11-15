@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <h2>Fruits</h2>
+
+  <form class="form-inline" method="post">
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Nom">
+    </div>
+    <div class="form-group">
+      <input type="text" name="origin" placeholder="Origine">
+    </div>
+    <div class="form-group">
+      <label for="comestible">Comestible</label>
+      <input type="checkbox" name="comestible">
+    </div>
+    <input type="submit" name="submit" value="Enregisrer">
+  </form>
+
+{% endblock %}

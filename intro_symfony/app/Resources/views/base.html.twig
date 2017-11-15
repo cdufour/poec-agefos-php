@@ -1,3 +1,10 @@
+{# commentaire
+
+{{ }} permet de lire une variable
+{% %} permet de définir in bloc d'instructions (exemple: for in, if)
+
+#}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,10 +12,17 @@
         <title>Intro Symfony par Christophe</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        
         {% block css %}{% endblock %}
     </head>
     <body>
+      <nav>
+        <ul class="nav nav-tabs">
+          <li><a href="{{ path('homepage') }}">Accueil</a></li>
+          <li><a href="{{ path('fruits_page') }}">Fruits</a></li>
+          <li><a href="{{ path('fruits_comestibles_page') }}">Fruits comestibles</a></li>
+          <li><a href="{{ path('example_page') }}">Exemple</a></li>
+        </ul>
+      </nav>
         {% block body %}{% endblock %}
     </body>
 </html>
