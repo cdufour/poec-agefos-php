@@ -65,6 +65,12 @@ class FruitController extends Controller {
   public function deleteAction($id) {
     // l'argument $id correpond au paramètre {id}
     // défini au niveau de l'annotation @Route
-    return new Response("Id du fruit à supprimer: " . $id);
+
+    $fruit = $this->getDoctrine()->getRepository(Fruit::class)->find($id);
+    $em = $this->getDoctrine()->getManager();
+    $em->remove($fruit); // requête de suppression en attente;
+    $em->flush(); // execute les requêtes SQL en attente
+
+    return $this->redirectToRoute('fruit_admin_page');
   }
 }
