@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Fruit
  *
@@ -42,6 +43,12 @@ class Fruit
      */
     private $comestible;
 
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Producer")
+     *
+     */
+    private $producer;
 
     /**
      * Get id
@@ -55,7 +62,7 @@ class Fruit
 
     /**
      * Set name
-     *
+     *AppBundle\Entity\Producer
      * @param string $name
      *
      * @return Fruit
@@ -123,5 +130,29 @@ class Fruit
     public function getComestible()
     {
         return $this->comestible;
+    }
+
+    /**
+     * Set producer
+     *
+     * @param \AppBundle\Entity\Producer $producer
+     *
+     * @return Fruit
+     */
+    public function setProducer(\AppBundle\Entity\Producer $producer = null)
+    {
+        $this->producer = $producer;
+
+        return $this;
+    }
+
+    /**
+     * Get producer
+     *
+     * @return \AppBundle\Entity\Producer
+     */
+    public function getProducer()
+    {
+        return $this->producer;
     }
 }

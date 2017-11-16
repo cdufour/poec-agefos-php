@@ -1,3 +1,17 @@
- php bin/console doctrine:database:create
- php bin/console doctrine:generate:entity
-  php bin/console doctrine:schema:update --force
+*** Doctrines ***
+# Création de la base de données
+php bin/console doctrine:database:create
+
+# Génération d'une entité
+php bin/console doctrine:generate:entity
+
+# Mise à jour de la structure de la base de données
+php bin/console doctrine:schema:update --force
+
+# Mise à jour d'une entité
+# Par exemple, après avoir ajouté une popriété à l'entité,
+# cette commande génère les setters/getters de la propriété
+php bin/console doctrine:generate:entities BundleName:EntityName
+
+# Génération d'un controller
+php bin/console generate:controller
