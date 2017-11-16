@@ -40,6 +40,9 @@
         </td>
         <td>
           <a
+            class="btn btn-primary btn-xs"
+            href="{{ path('fruit_update', {'id': f.id}) }}">Modifier</a>
+          <a
             class="btn btn-danger btn-xs"
             href="{{ path('fruit_delete', {'id': f.id}) }}">Supprimer</a>
         </td>

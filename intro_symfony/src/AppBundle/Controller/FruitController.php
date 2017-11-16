@@ -73,4 +73,44 @@ class FruitController extends Controller {
 
     return $this->redirectToRoute('fruit_admin_page');
   }
+
+  /**
+   * @Route("/update/{id}", name="fruit_update")
+  */
+  public function updateAction($id, Request $request) {
+    // dans cette variante, l'objet fruit est crée sans le notifier
+    // au manager
+    //$fruit = $this->getDoctrine()->getRepository(Fruit::class)->find($id);
+
+    // Appeler getRepository depuis getManager établit une connexion,
+    // une "visibilité" entre le repo et le manager
+    // ici, le manager "est au courant", est notifié de l'existence de l'objet
+    // fruit, si cet objet change (reçoit de nouvelles valeurs)
+    // le manager le sait. Le manager "surveille" cet objet.
+    $em = $this->getDoctrine()->getManager();
+    $fruit = $em->getRepository(Fruit::class)->find($id);
+
+    if ($request->getMethod() == 'POST') {
+      $fruit->setName($request->request->get('name'));
+      $fruit->setOrigin($request->request->get('origin'));
+
+      $comestible = ($request->request->get('comestible')) ? 1 : 0;
+      $fruit->setComestible($comestible);
+
+      // Variante syntaxique pour le ternaire
+      // ($request->request->get('comestible'))
+      //   ? $fruit->setComestible(1)
+      //   : $fruit->setComestible(0);
+
+      $em->flush(); // si l'objet $fruit a été modifié (a reçu de nouvelles
+      // valeurs), le manager exécutera la requête SQL appropriée
+      return $this->redirectToRoute('fruit_admin_page');
+    }
+
+    return $this->render('fruit/update.html.twig', array(
+      'fruit' => $fruit
+    ));
+
+  }
+
 }
