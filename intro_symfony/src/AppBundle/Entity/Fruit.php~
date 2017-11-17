@@ -161,45 +161,4 @@ class Fruit
     {
         return $this->producer;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->retailors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add retailor
-     *
-     * @param \AppBundle\Entity\Retailor $retailor
-     *
-     * @return Fruit
-     */
-    public function addRetailor(\AppBundle\Entity\Retailor $retailor)
-    {
-        $this->retailors[] = $retailor;
-
-        return $this;
-    }
-
-    /**
-     * Remove retailor
-     *
-     * @param \AppBundle\Entity\Retailor $retailor
-     */
-    public function removeRetailor(\AppBundle\Entity\Retailor $retailor)
-    {
-        $this->retailors->removeElement($retailor);
-    }
-
-    /**
-     * Get retailors
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRetailors()
-    {
-        return $this->retailors;
-    }
 }

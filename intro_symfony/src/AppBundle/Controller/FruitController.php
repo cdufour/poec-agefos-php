@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Fruit;
+use AppBundle\Entity\Producer;
 
 /**
  * @Route("/fruits")
@@ -26,15 +27,21 @@ class FruitController extends Controller {
       $name = $post->get('name');
       $origin = $post->get('origin');
       $comestible = $post->get('comestible');
+      $producer_id = $post->get('producer_id');
+
+      // récupérer l'objet producer complet à partir d'un id
+      $producer = $this->getDoctrine()
+        ->getRepository(Producer::class)->find($producer_id);
 
       // vérification du contenu de la variable $comestible
       $comestible = ($comestible) ? 1 : 0; // use AppBundle\Entity\Fruit;ternaire
-
       $fruit = new Fruit();
+
       // hydratation
       $fruit->setName($name);
       $fruit->setOrigin($origin);
       $fruit->setComestible($comestible);
+      $fruit->setProducer($producer);
 
       // utilisaton du EntityManager
       $em = $this->getDoctrine()->getManager();
@@ -54,8 +61,15 @@ class FruitController extends Controller {
       ->getRepository(Fruit::class)
       ->findAll();
 
+    // Récupération des producteurs
+    $producers = $this
+      ->getDoctrine()
+      ->getRepository(Producer::class)
+      ->findAll();
+
     return $this->render('fruit/index.html.twig', array(
-      'fruits' => $fruits
+      'fruits' => $fruits,
+      'producers' => $producers
     ));
   }
 

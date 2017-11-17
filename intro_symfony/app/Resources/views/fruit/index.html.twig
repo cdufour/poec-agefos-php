@@ -15,6 +15,14 @@
       <label for="comestible">Comestible</label>
       <input type="checkbox" name="comestible">
     </div>
+    <div class="form-group">
+      <select name="producer_id">
+        <!-- afficher autant d'options qu'il y a de producteurs enregistrés -->
+        {% for p in producers %}
+          <option value="{{p.id}}">{{p.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
     <input type="submit" name="submit" value="Enregisrer">
   </form>
 
@@ -25,6 +33,8 @@
       <th>Nom</th>
       <th>Origine</th>
       <th>Comestible</th>
+      <th>Producteur</th>
+      <th>Détaillants</th>
       <th>Actions</th>
     </tr>
     {% for f in fruits %}
@@ -36,6 +46,22 @@
             oui
           {% else %}
             non
+          {% endif %}
+        </td>
+        <td>
+          {% if f.producer %}
+            {#
+              la propriété producer ne vaut pas NULL :
+              on peut accéder à la propriété name de l'objet producer
+            #}
+            {{ f.producer.name }}
+          {% endif %}
+        </td>
+        <td>
+          {% if f.retailors | length > 0 %}
+            {% for r in f.retailors %}
+             <div>{{ r.name }}</div>
+            {% endfor %}
           {% endif %}
         </td>
         <td>

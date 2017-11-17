@@ -51,7 +51,7 @@ class ProducerController extends Controller
         $form->handleRequest($request);
 
         // méthode permettant de savoir si le formulaire a été envoyé
-        // équivalent de $request->getMethod() lorqu'on utilise
+        // équivalent de $request->getMethod() == 'POST' lorqu'on utilise
         // l'objet Request $request
         if ($form->isSubmitted()) {
           // hydratation automatique grâce à getData()
@@ -66,7 +66,7 @@ class ProducerController extends Controller
         }
 
         return $this->render('AppBundle:Producer:add.html.twig', array(
-          'form' => $form->createView()
+          'form' => $form
         ));
     }
 

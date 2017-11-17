@@ -1,0 +1,9 @@
+*** TP 4: Symfony ***
+ Nom du dossier : TP4
+
+Créer une application avec deux entités minimum.
+Thématique au choix (exemple: Equipe de foot, Salle de Cinéma )
+
+L'applicaton devra proposer:
+- des controllers, des routes, des relations entre entités
+- du crud (des formulaires)
