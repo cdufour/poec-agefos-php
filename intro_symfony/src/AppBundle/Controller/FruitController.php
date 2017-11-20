@@ -42,14 +42,19 @@ class FruitController extends Controller {
       $comestible = ($comestible) ? 1 : 0; // use AppBundle\Entity\Fruit;ternaire
       $fruit = new Fruit();
 
-      // boucle sur le tableau des identifiants des catégories cochées
-      foreach($categories_posted as $c) {
-        // A chaque passage création d'un objet de type Category
-        $category = $this->getDoctrine()
-          ->getRepository(Category::class)->find($c);
+      if ($categories_posted !== NULL) {
+        // l'utilisateur a coché au moins une case de catégorie
 
-        // Alimentation de la propriété category de l'objet $fruit
-        $fruit->addCategory($category);
+        // boucle sur le tableau des identifiants des catégories cochées
+        foreach($categories_posted as $c) {
+          // A chaque passage création d'un objet de type Category
+          $category = $this->getDoctrine()
+            ->getRepository(Category::class)->find($c);
+
+          // Alimentation de la propriété category de l'objet $fruit
+          $fruit->addCategory($category);
+        }
+
       }
 
       // hydratation

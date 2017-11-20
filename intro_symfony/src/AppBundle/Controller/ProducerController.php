@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Producer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/producer")
@@ -41,6 +43,7 @@ class ProducerController extends Controller
         // en pur PHP OO (pas de balise HTML)
         $form = $this->createFormBuilder($producer)
           ->add('name', TextType::class, array())
+          ->add('email', TextType::class, array())
           ->add('submit', SubmitType::class, array(
             'label' => 'Enregistrer',
           ))
@@ -53,9 +56,26 @@ class ProducerController extends Controller
         // méthode permettant de savoir si le formulaire a été envoyé
         // équivalent de $request->getMethod() == 'POST' lorqu'on utilise
         // l'objet Request $request
-        if ($form->isSubmitted()) {
+
+        // la méthode isValid est en relation avec les annotations
+        // @Assert, elle vérifie l'ensemble des conditions de validation
+        // définies par les annotations
+        if ($form->isSubmitted() && $form->isValid()) {
           // hydratation automatique grâce à getData()
           $producer = $form->getData();
+
+          //validation de données en PHP sans annotations
+          // $str_len = strlen($producer->getName());
+          // $min = 3;
+          // $max = 10;
+          // $cond1 = $str_len >= $min;
+          // $cond2 = $str_len <= $max;
+          // $total_cond = $cond1 && $cond2;
+          // $message = "Le nom du producteur doit avoir";
+          // $message .= " au moins " . $min . " caractères";
+          // $message .= " et au plus " . $max . " caractères";
+          //
+          // if (!$total_cond) return new Response($message);
 
           // enregistrement en base de données
           $em = $this->getDoctrine()->getManager();
