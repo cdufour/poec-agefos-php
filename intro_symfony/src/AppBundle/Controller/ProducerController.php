@@ -90,4 +90,18 @@ class ProducerController extends Controller
         ));
     }
 
+    /**
+     * @Route("/{id}", name="producer_details")
+     */
+    public function detailsAction($id)
+    {
+        $producer = $this->getDoctrine()
+          ->getRepository(Producer::class)
+          ->find($id);
+
+        return $this->render('AppBundle:Producer:details.html.twig', array(
+          'producer' => $producer
+        ));
+    }
+
 }

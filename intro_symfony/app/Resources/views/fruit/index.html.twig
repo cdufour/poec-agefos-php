@@ -40,7 +40,7 @@
       <th>Origine</th>
       <th>Comestible</th>
       <th>Producteur</th>
-      <th>Détaillants</th>
+      <th style="display:none">Détaillants</th>
       <th>Actions</th>
     </tr>
     {% for f in fruits %}
@@ -63,7 +63,7 @@
             {{ f.producer.name }}
           {% endif %}
         </td>
-        <td>
+        <td style="display:none">
           {% if f.retailors | length > 0 %}
             {% for r in f.retailors %}
              <div>{{ r.name }}</div>
@@ -71,6 +71,9 @@
           {% endif %}
         </td>
         <td>
+          <a
+            class="btn btn-default btn-xs"
+            href="{{ path('fruit_details', {'id': f.id}) }}">Détails</a>
           <a
             class="btn btn-primary btn-xs"
             href="{{ path('fruit_update', {'id': f.id}) }}">Modifier</a>

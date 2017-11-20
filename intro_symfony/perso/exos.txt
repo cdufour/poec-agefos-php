@@ -30,3 +30,10 @@ cette route affichera un tableau de fruits comestibles (utiliser
 comme source de données le tableau $fruits3)
 Ajouter cette route au menu principal
 --
+
+
+--
+Créer une page de détails pour les producteurs
+Sur la page fruit_detail, afficher sous forme lien le nom
+du producteur (renvoi vers la page détails du producteur)
+--
