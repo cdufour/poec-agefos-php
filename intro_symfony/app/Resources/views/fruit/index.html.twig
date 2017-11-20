@@ -4,7 +4,7 @@
 
   <h2>Fruits</h2>
 
-  <form class="form-inline" method="post">
+  <form class="form-inline well" method="post">
     <div class="form-group">
       <input type="text" name="name" placeholder="Nom">
     </div>
@@ -22,6 +22,12 @@
           <option value="{{p.id}}">{{p.name}}</option>
         {% endfor %}
       </select>
+    </div>
+    <div class="form-group">
+      <p>Catégories</p>
+      {% for c in categories %}
+        <input name="categories[]" type="checkbox" value="{{c.id}}">{{c.name}}
+      {% endfor %}
     </div>
     <input type="submit" name="submit" value="Enregisrer">
   </form>

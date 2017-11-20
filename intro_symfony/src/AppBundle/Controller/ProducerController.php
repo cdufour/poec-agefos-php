@@ -66,7 +66,7 @@ class ProducerController extends Controller
         }
 
         return $this->render('AppBundle:Producer:add.html.twig', array(
-          'form' => $form
+          'form' => $form->createView()
         ));
     }
 
