@@ -184,4 +184,16 @@ class FruitController extends Controller {
     ));
   }
 
+  /**
+   * @Route("/api/json")
+  */
+  public function jsonAction() {
+    $fruits = ['pomme', 'poire', 'cerise'];
+
+    // conversion du tableau PHP en chaîne de caractères JSON
+    $fruits_json = json_encode($fruits);
+
+    return new Response($fruits_json);
+  }
+
 }
