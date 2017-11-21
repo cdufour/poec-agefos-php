@@ -85,7 +85,7 @@ class FruitController extends Controller {
     $producers = $this
       ->getDoctrine()
       ->getRepository(Producer::class)
-      ->findAll();
+      ->findAllNotAssigned();
 
     // Récupération des catégories
     $categories = $this

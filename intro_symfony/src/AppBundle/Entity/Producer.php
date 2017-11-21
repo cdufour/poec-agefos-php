@@ -40,6 +40,14 @@ class Producer
      */
     private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="logo", type="string", length=255)
+     *
+     */
+    private $logo;
+
 
     /**
      * Get id
@@ -97,5 +105,29 @@ class Producer
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     *
+     * @return Producer
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
     }
 }

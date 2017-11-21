@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Producer;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +45,7 @@ class ProducerController extends Controller
         $form = $this->createFormBuilder($producer)
           ->add('name', TextType::class, array())
           ->add('email', TextType::class, array())
+          ->add('logo', FileType::class, array('label' => 'Choisir un logo'))
           ->add('submit', SubmitType::class, array(
             'label' => 'Enregistrer',
           ))
@@ -60,9 +62,23 @@ class ProducerController extends Controller
         // la méthode isValid est en relation avec les annotations
         // @Assert, elle vérifie l'ensemble des conditions de validation
         // définies par les annotations
-        if ($form->isSubmitted() && $form->isValid()) {
+        // && $form->isValid()
+        if ($form->isSubmitted()) {
           // hydratation automatique grâce à getData()
           $producer = $form->getData();
+          $file = $producer->getLogo(); // récupération de l'objet UploadedFile
+          // placé dans la propriété logo du $producer
+          $filename =
+            'logo_' . strtolower($producer->getName()) . '.' . $file->guessExtension();
+
+          // getParameter('key') récupère la valeur d'une clé définie dans
+          // le fichier config.yml
+          // move(dossier_de_destination, nom_du_fichier)
+          $file->move($this->getParameter('dir_logo'), $filename);
+
+          // mise à jour de la propriété logo de $producer
+          $producer->setLogo($filename);
+
 
           //validation de données en PHP sans annotations
           // $str_len = strlen($producer->getName());
@@ -86,7 +102,9 @@ class ProducerController extends Controller
         }
 
         return $this->render('AppBundle:Producer:add.html.twig', array(
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'message' => 'Simple texte',
+          'color' => 'orange'
         ));
     }
 
