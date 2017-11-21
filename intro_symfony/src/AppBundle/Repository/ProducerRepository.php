@@ -20,12 +20,13 @@ class ProducerRepository extends \Doctrine\ORM\EntityRepository
 
   public function findAllNotAssigned()
   {
+    $query =
+    ' SELECT p FROM AppBundle:Producer p
+      WHERE NOT EXISTS (SELECT f FROM AppBundle:Fruit f WHERE p = f.producer)
+      ORDER BY p.name ASC';
+
     return $this->getEntityManager()
-      ->createQuery(
-        ' SELECT p FROM AppBundle:Producer p
-          WHERE NOT EXISTS (SELECT f FROM AppBundle:Fruit f WHERE p = f.producer)
-          ORDER BY p.name ASC'
-      )
+      ->createQuery($query)
       ->getResult();
   }
 }

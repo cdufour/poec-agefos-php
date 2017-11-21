@@ -169,4 +169,19 @@ class FruitController extends Controller {
     ));
 
   }
+
+  /**
+   * @Route("/category/{name}")
+  */
+  public function byCategoryAction($name) {
+    $fruits = $this->getDoctrine()
+      ->getRepository(Fruit::class)
+      ->findByCategoryName($name);
+
+    return $this->render('fruit/by-category.html.twig', array(
+      'fruits' => $fruits,
+      'name' => $name
+    ));
+  }
+
 }

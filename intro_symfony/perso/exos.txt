@@ -41,3 +41,13 @@ du producteur (renvoi vers la page détails du producteur)
 Dans la page fruit_details afficher le logo du producteur à côté
 de son nom
 --
+
+--
+Créer une route /fruits/category/{name}
+Le template associé à cette route affichera
+la liste des fruits liés au nom de catégorie passé dans l'URL
+exemple: /fruits/category/Cuisine affichera les fruits liés
+à la catégorie Cuisine
+
+Non corrigé
+--
