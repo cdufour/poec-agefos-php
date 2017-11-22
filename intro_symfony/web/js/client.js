@@ -1,18 +1,27 @@
 $(document).ready(function() {
 // dom chargé
 
-var server = 'http://localhost:8000';
+var app = {
+  server: 'http://localhost:8000',
+  data: {
+    fruits: null
+  }
+};
 
 // ciblage et mise en cache
-var app                   = $('div#app');
-var btnTestAjax           = app.find('button#btnTestAjax');
-var btnListFruits         = app.find('button#btnListFruits');
-var fruitDisplay          = app.find('div#fruitDisplay');
-var selectFormat          = app.find('select#selectFormat');
+var appHtml               = $('div#app');
+var btnTestAjax           = appHtml.find('button#btnTestAjax');
+var btnListFruits         = appHtml.find('button#btnListFruits');
+var fruitDisplay          = appHtml.find('div#fruitDisplay');
+var selectFormat          = appHtml.find('select#selectFormat');
 
 // fonctions
+function init() {
+  ajaxListFruits(); // appelle la function de récupération de fruits
+}
+
 var ajaxFn = function() {
-  $.get(server + '/fruits/api/json', function(res) {
+  $.get(app.server + '/fruits/api/json', function(res) {
     console.log(res);
     console.log(typeof res);
     // la réponse du server (res) est une chaîne de caractères
@@ -30,11 +39,22 @@ var ajaxFn = function() {
 }
 
 var ajaxListFruits = function() {
-  $.get(server + '/fruits/api/list', function(res) {
-    var fruits = JSON.parse(res);
-    var format = selectFormat.val(); // format d'affichage sélectionné
-    fruitDisplay.html(transformToHtml(fruits, format));
-  });
+  var format = selectFormat.val(); // format d'affichage sélectionné
+  if (app.data.fruits == null) {
+    // si les données n'ont pas déjà été stockées on les demande au serveur
+    $.get(app.server + '/fruits/api/list', function(res) {
+      // les requêtes ajax sont asynchrones
+      // il faut s'assurer que la réponse de serveur est reçue
+      // avant d'effectuer des opération basées sur la réponse du serveur
+      var fruits = JSON.parse(res);
+      app.data.fruits = fruits; // stockage de la réponse du serveur
+      fruitDisplay.html(transformToHtml(app.data.fruits, format));
+    });
+  } else {
+    // les données ont déjà été reçues
+    fruitDisplay.html(transformToHtml(app.data.fruits, format));
+  }
+
 }
 
 var transformToHtml = function(fruits, type) {
@@ -85,8 +105,9 @@ var transformToHtml = function(fruits, type) {
 // événements
 btnTestAjax.click(ajaxFn);
 btnListFruits.click(ajaxListFruits);
+selectFormat.change(ajaxListFruits);
 
 
-
+init();
 
 }); //fin ready()
