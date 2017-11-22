@@ -30,8 +30,21 @@ var ajaxFn = function() {
 var ajaxListFruits = function() {
   $.get(server + '/fruits/api/list', function(res) {
     var fruits = JSON.parse(res);
-    console.log(fruits);
+    fruitDisplay.html(transformToHtml(fruits, 'list'));
   });
+}
+
+var transformToHtml = function(fruits, type) {
+  var output = '';
+  if (type == 'list') {
+    output += '<ul>';
+    // itération sur fruits
+    fruits.forEach(function(fruit) {
+      output += '<li>' + fruit.name + '</li>';
+    });
+    output += '</ul>';
+  }
+  return output;
 }
 
 // événements
