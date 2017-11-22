@@ -4,9 +4,11 @@ $(document).ready(function() {
 var server = 'http://localhost:8000';
 
 // ciblage et mise en cache
-var btnTestAjax           = $('button#btnTestAjax');
-var btnListFruits         = $('button#btnListFruits');
-var fruitDisplay          = $('div#fruitDisplay');
+var app                   = $('div#app');
+var btnTestAjax           = app.find('button#btnTestAjax');
+var btnListFruits         = app.find('button#btnListFruits');
+var fruitDisplay          = app.find('div#fruitDisplay');
+var selectFormat          = app.find('select#selectFormat');
 
 // fonctions
 var ajaxFn = function() {
@@ -30,7 +32,8 @@ var ajaxFn = function() {
 var ajaxListFruits = function() {
   $.get(server + '/fruits/api/list', function(res) {
     var fruits = JSON.parse(res);
-    fruitDisplay.html(transformToHtml(fruits, 'table'));
+    var format = selectFormat.val(); // format d'affichage sélectionné
+    fruitDisplay.html(transformToHtml(fruits, format));
   });
 }
 
