@@ -30,12 +30,14 @@ var ajaxFn = function() {
 var ajaxListFruits = function() {
   $.get(server + '/fruits/api/list', function(res) {
     var fruits = JSON.parse(res);
-    fruitDisplay.html(transformToHtml(fruits, 'list'));
+    fruitDisplay.html(transformToHtml(fruits, 'table'));
   });
 }
 
 var transformToHtml = function(fruits, type) {
   var output = '';
+
+  // liste
   if (type == 'list') {
     output += '<ul>';
     // itération sur fruits
@@ -44,6 +46,36 @@ var transformToHtml = function(fruits, type) {
     });
     output += '</ul>';
   }
+
+  // tableau
+  if (type == 'table') {
+    output += '<table class="table table-striped">';
+    var header =
+      '<tr><th>Nom</th><th>Origine</th><th>Comestible</th><th>Producteur</th></tr>';
+
+    output += header;
+
+    fruits.forEach(function(fruit) {
+      // vérification des données
+      var comestible = (fruit.comestible) ? 'Oui' : 'Non';
+      if (fruit.producer == undefined) {
+        var producer = 'Aucun producteur';
+      } else {
+        var producer = fruit.producer;
+      }
+
+      output += '<tr>';
+      output += '<td>'+fruit.name+'</td>'
+      output += '<td>'+fruit.origin+'</td>'
+      output += '<td>'+comestible+'</td>'
+      output += '<td>'+producer+'</td>'
+      output += '</tr>';
+    });
+
+    output += '</table>'
+  }
+
+
   return output;
 }
 

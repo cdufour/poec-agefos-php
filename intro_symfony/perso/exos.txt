@@ -48,6 +48,10 @@ Le template associé à cette route affichera
 la liste des fruits liés au nom de catégorie passé dans l'URL
 exemple: /fruits/category/Cuisine affichera les fruits liés
 à la catégorie Cuisine
+--
 
-Non corrigé
+--
+Au clic sur le bouton btnListFruits
+Afficher les fruits sous forme de tableau HTML avec 4 colonnes
+(nom, origine, comestible, producteur)
 --
