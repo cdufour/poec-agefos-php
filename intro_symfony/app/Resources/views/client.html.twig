@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2>Ajax</h2>
+<button id="btnTestAjax" type="button">Test ajax</button>
+<button id="btnListFruits" type="button">liste des fruits</button>
+<div id="fruitDisplay"></div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{asset('js/client.js')}}"></script>
+{% endblock %}

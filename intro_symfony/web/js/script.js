@@ -6,7 +6,7 @@ $(document).ready(function () {
   // mise en cache (stockage dans une variable) du retour de la
   // function $(cible)
   var btnHideForm = $('#btnHideForm');
-  var isFormVisible = true;
+  var isFormVisible = false;
 
   btnHideForm.click(function() {
     // next() renvoie l'élément suivant dans le dom (form)
@@ -17,7 +17,5 @@ $(document).ready(function () {
       ? $(this).html('Masquer le formulaire')
       : $(this).html('Afficher le formulaire');
   });
-
-
 
 });

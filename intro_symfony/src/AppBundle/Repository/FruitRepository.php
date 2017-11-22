@@ -18,14 +18,22 @@ class FruitRepository extends \Doctrine\ORM\EntityRepository
     // requête valable dans le cas d'une association OneToOne
     // Ici, puisque f.category renvoie un tableau, il n'est pas possible
     // de cibler une propriété .name (inexistante)
-    $query =
-      'SELECT f FROM AppBundle:Fruit f WHERE f.category.name = \'Cuisine\'';
+    //$query =
+      //'SELECT f FROM AppBundle:Fruit f WHERE f.category.name = \'Cuisine\'';
     // Il faut trouver un moyen de cibler la propriété .name des objets
     // de type Category situés à l'intérieur du tableau f.category
-    // DQL fournit-il une solution ??? Christophe mène l'enquête
+    // DQL fournit-il une solution ??? Christophe mène l'enquête avec succès
+
+    $query =
+    ' SELECT f FROM AppBundle:Fruit f
+      JOIN f.category c
+      WHERE c.name = :name
+      ORDER BY f.name ASC
+    ';
 
     return $this->getEntityManager()
       ->createQuery($query)
+      ->setParameter(':name', $name)
       ->getResult();
   }
 }

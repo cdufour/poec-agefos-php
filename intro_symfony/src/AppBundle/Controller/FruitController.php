@@ -189,9 +189,58 @@ class FruitController extends Controller {
   */
   public function jsonAction() {
     $fruits = ['pomme', 'poire', 'cerise'];
+    $fruit = [
+      'name' => 'Cerise',
+      'origin' => 'France',
+      'comestible' => true,
+      'category' => [
+        array('name' => 'Cuisine'),
+        array('name' => 'Voyage')
+      ]
+    ];
 
     // conversion du tableau PHP en chaîne de caractères JSON
-    $fruits_json = json_encode($fruits);
+    $fruits_json = json_encode($fruit);
+
+    return new Response($fruits_json);
+  }
+
+  /**
+   * @Route("/api/client")
+  */
+  public function clientAction() {
+
+    return $this->render('client.html.twig');
+  }
+
+  /**
+   * @Route("/api/list")
+  */
+  public function ajaxListFruitsAction() {
+    $fruits = $this->getDoctrine()
+      ->getRepository(Fruit::class)
+      ->findAll();
+
+    // tentative d'encodage en JSON
+    // Problème json_encode ne peut pas encoder des objets PHP
+    // json_encode fonctionne avec des tableaux associatifs
+    //$fruits_json = json_encode($fruits);
+
+    // transformation d'objets Fruit en tableaux associatifs
+    $fruits_assoc = [];
+    foreach($fruits as $fruit) {
+      $fruit_assoc = [
+        'name' => $fruit->getName(),
+        'origin' => $fruit->getOrigin(),
+        'comestible' => $fruit->getComestible(),
+      ];
+      if ($fruit->getProducer()) {
+        $fruit_assoc['producer'] = $fruit->getProducer()->getName();
+      }
+      $fruits_assoc[] = $fruit_assoc; // équivant d'un array_push
+    }
+    // encodage en JSON du tableau associatif
+    $fruits_json = json_encode($fruits_assoc);
 
     return new Response($fruits_json);
   }

@@ -59,7 +59,7 @@
           {% if f.producer %}
             {#
               la propriété producer ne vaut pas NULL :
-              on peut accéder à la propriété name de l'objet producer
+            on peut{% block js %}{% endblock %} accéder à la propriété name de l'objet producer
             #}
             {{ f.producer.name }}
           {% endif %}
@@ -86,4 +86,8 @@
     {% endfor %}
   </table>
 
+{% endblock %}
+
+{% block js %}
+<script src="{{asset('js/script.js')}}"></script>
 {% endblock %}
