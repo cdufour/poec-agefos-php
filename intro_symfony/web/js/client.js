@@ -49,10 +49,17 @@ var ajaxListFruits = function() {
       var fruits = JSON.parse(res);
       app.data.fruits = fruits; // stockage de la réponse du serveur
       fruitDisplay.html(transformToHtml(app.data.fruits, format));
+
     });
   } else {
     // les données ont déjà été reçues
     fruitDisplay.html(transformToHtml(app.data.fruits, format));
+
+    // écouteur d'événement bien placé: on cible td.fruitName
+    // avec la certitude que cet élément est dans le DOM
+    // $('td.fruitName').click(function() {
+    //   console.log('click');
+    // });
   }
 
 }
@@ -88,7 +95,7 @@ var transformToHtml = function(fruits, type) {
       }
 
       output += '<tr>';
-      output += '<td>'+fruit.name+'</td>'
+      output += '<td class="fruitName" id="'+fruit.id+'">'+fruit.name+'</td>'
       output += '<td>'+fruit.origin+'</td>'
       output += '<td>'+comestible+'</td>'
       output += '<td>'+producer+'</td>'
@@ -107,6 +114,26 @@ btnTestAjax.click(ajaxFn);
 btnListFruits.click(ajaxListFruits);
 selectFormat.change(ajaxListFruits);
 
+// problème de chronologie, ce code sera valable dans le futur,
+// cad lorsque la balise td.fruiName existera dans le DOM
+// $('td.fruitName').click(function() {
+//   console.log('click');
+// });
+
+// la function .on permet d'attacher un écouteur d'événement à l'élément ciblé
+// ou à l'un de ses descendants (présent ou à venir)
+// ici: lorsque td.fruitName apparaîtra dans le DOM en tant que descendant
+// de fruitDisplay, un écouteur d'événement click lui sera attaché
+fruitDisplay.on('click', 'td.fruitName', function() {
+  var id = $(this).attr('id'); // récupération de la valeur associée
+  // à l'attribut html (ici : id) ciblé
+  var url = app.server + '/fruits/api/detail/' + id;
+
+  // requête ajax
+  $.get(url, function(res) {
+    console.log(res);
+  });
+});
 
 init();
 

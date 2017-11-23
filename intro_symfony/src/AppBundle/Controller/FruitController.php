@@ -230,6 +230,7 @@ class FruitController extends Controller {
     $fruits_assoc = [];
     foreach($fruits as $fruit) {
       $fruit_assoc = [
+        'id' => $fruit->getId(),
         'name' => $fruit->getName(),
         'origin' => $fruit->getOrigin(),
         'comestible' => $fruit->getComestible(),
@@ -243,6 +244,69 @@ class FruitController extends Controller {
     $fruits_json = json_encode($fruits_assoc);
 
     return new Response($fruits_json);
+  }
+
+  /**
+   * @Route("/api/detail/{id}")
+  */
+  public function ajaxDetailFruitAction($id) {
+    $fruit = $this->getDoctrine()
+      ->getRepository(Fruit::class)
+      ->find($id);
+
+    // création d'un tableau associatif à partir de l'obje $fruit
+    $fruit_assoc = [
+      'id' => $fruit->getId(),
+      'name' => $fruit->getName(),
+      'origin' => $fruit->getOrigin()
+    ];
+
+    $comestible = ($fruit->getComestible()) ? 'Oui' : 'Non';
+    $fruit_assoc['comestible'] = $comestible;
+
+    // producteur
+    if ($fruit->getProducer()) {
+      $p = $fruit->getProducer();
+      $producer_assoc = [
+        'id' => $p->getId(),
+        'name' => $p->getName()
+      ];
+      $producer_assoc['email'] =
+        ($p->getEmail()) ? $p->getEmail() : '';
+
+      $producer_assoc['logo'] =
+        ($p->getLogo()) ? $p->getLogo() : '';
+
+      // ajout du producteur dans $fruit_assoc
+      $fruit_assoc['producer'] = $producer_assoc;
+    } else {
+      $fruit_assoc['producer'] = null;
+    }
+
+    // détaillants (tableau d'objets)
+    if (sizeof($fruit->getRetailors()) > 0) {
+      $retailors = [];
+      foreach($fruit->getRetailors() as $r) {
+        $retailors[] = ['id' => $r->getId(), 'name' => $r->getName()];
+      }
+      $fruit_assoc['retailors'] = $retailors;
+    } else {
+      $fruit_assoc['retailors'] = null;
+    }
+
+    // catégories
+    if (sizeof($fruit->getCategory()) > 0) {
+      $categories = [];
+      foreach($fruit->getCategory() as $c) {
+        $categories[] = ['id' => $c->getId(), 'name' => $c->getName()];
+      }
+      $fruit_assoc['categories'] = $categories;
+    } else {
+      $fruit_assoc['categories'] = null;
+    }
+    
+    $fruit_json = json_encode($fruit_assoc);
+    return new Response($fruit_json);
   }
 
 }
