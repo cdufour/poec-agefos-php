@@ -14,6 +14,7 @@ var btnTestAjax           = appHtml.find('button#btnTestAjax');
 var btnListFruits         = appHtml.find('button#btnListFruits');
 var fruitDisplay          = appHtml.find('div#fruitDisplay');
 var selectFormat          = appHtml.find('select#selectFormat');
+var fruitDetail           = appHtml.find('div#fruitDetail');
 
 // fonctions
 function init() {
@@ -109,6 +110,33 @@ var transformToHtml = function(fruits, type) {
   return output;
 }
 
+var detailFruit = function() {
+  var id = $(this).attr('id'); // récupération de la valeur associée
+  // à l'attribut html (ici : id) ciblé
+  var url = app.server + '/fruits/api/detail/' + id;
+
+  // requête ajax
+  $.get(url, function(res) {
+    var fruit = JSON.parse(res);
+    displayDetailFruit(fruit);
+  });
+}
+
+var displayDetailFruit = function(fruit) {
+  var output = '';
+  output += '<h4>'+fruit.name+' ('+fruit.origin+')</h4>';
+
+  if (fruit.producer) {
+    output += '<p>Produit par '+fruit.producer.name+'</p>';
+    if (fruit.producer.logo) {
+      var url = app.server + '/img/logo/' + fruit.producer.logo;
+      output += '<img class="logo" alt="" src="'+url+'">';
+    }
+  }
+
+  fruitDetail.html(output);
+}
+
 // événements
 btnTestAjax.click(ajaxFn);
 btnListFruits.click(ajaxListFruits);
@@ -124,16 +152,7 @@ selectFormat.change(ajaxListFruits);
 // ou à l'un de ses descendants (présent ou à venir)
 // ici: lorsque td.fruitName apparaîtra dans le DOM en tant que descendant
 // de fruitDisplay, un écouteur d'événement click lui sera attaché
-fruitDisplay.on('click', 'td.fruitName', function() {
-  var id = $(this).attr('id'); // récupération de la valeur associée
-  // à l'attribut html (ici : id) ciblé
-  var url = app.server + '/fruits/api/detail/' + id;
-
-  // requête ajax
-  $.get(url, function(res) {
-    console.log(res);
-  });
-});
+fruitDisplay.on('click', 'td.fruitName', detailFruit);
 
 init();
 

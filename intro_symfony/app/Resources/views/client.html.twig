@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block css %}
+  <style>
+  #btnTestAjax, #btnListFruits { display: none }
+  .fruitName { cursor: pointer }
+  img.logo {
+    width: 150px;
+    border: 1px #555 solid;
+    border-radius: 4px
+  }
+  </style>
+{% endblock %}
+
 {% block body %}
 
 <h2>Ajax</h2>
@@ -18,7 +30,7 @@
         <div id="fruitDisplay"></div>
       </div>
       <div class="col-md-4">
-        <div id="fruitDetail">Détails</div>
+        <div id="fruitDetail"></div>
       </div>
     </div>
   </div>
