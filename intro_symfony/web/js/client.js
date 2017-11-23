@@ -15,8 +15,12 @@ var btnListFruits         = appHtml.find('button#btnListFruits');
 var fruitDisplay          = appHtml.find('div#fruitDisplay');
 var selectFormat          = appHtml.find('select#selectFormat');
 var fruitDetail           = appHtml.find('div#fruitDetail');
+var cbComestible          = appHtml.find('input#cbComestible');
+var cbNotComestible       = appHtml.find('input#cbNotComestible');
 
-// fonctions
+var elemActive            = null;
+
+// *** FONCTIONS ***
 function init() {
   ajaxListFruits(); // appelle la function de récupération de fruits
 }
@@ -121,6 +125,13 @@ var detailFruit = function() {
     var fruit = JSON.parse(res);
     displayDetailFruit(fruit);
   });
+
+  if (elemActive) elemActive.parent().removeClass('custom-active');
+  elemActive = $(this);
+
+  // equivalent plus "lourd":
+  //$(this).parent().parent().children('tr').removeClass('custom-active');
+  $(this).parent().addClass('custom-active');
 }
 
 var displayDetailFruit = function(fruit) {
@@ -138,7 +149,30 @@ var displayDetailFruit = function(fruit) {
   fruitDetail.html(output);
 }
 
-// événements
+var filterByComestible = function() {
+  var cb1 = cbComestible.prop('checked');
+  var cb2 = cbNotComestible.prop('checked');
+
+  // si la case Comestible n'est pas cochée (checked = false)
+  // nous devons retirer du tableau tous les fruits comestibles
+  // sans cibler le dom, sans itérer le dom (coûteux)
+  // la meilleure solution consiste à d'aborder filtrer
+  // la source de données (app.data.fruits)
+
+  var fruitsFiltered =
+    app.data.fruits.filter(function(fruit) {
+      // à compléter
+      return true;
+    });
+
+  fruitDisplay.html(transformToHtml(fruitsFiltered, 'table'));
+
+}
+
+// **************************************************
+
+
+// *** EVENEMENTS ***
 btnTestAjax.click(ajaxFn);
 btnListFruits.click(ajaxListFruits);
 selectFormat.change(ajaxListFruits);
@@ -159,7 +193,11 @@ selectFormat.change(ajaxListFruits);
 //   .on('click', 'li.fruitName', detailFruit);
 
 // équivalent en utilisant uniquement le nom de la classe .fruitName
-fruitDisplay.on('click', '.fruitName', detailFruit)
+fruitDisplay.on('click', '.fruitName', detailFruit);
+
+cbComestible.on('click', filterByComestible);
+cbNotComestible.on('click', filterByComestible);
+
 
 init();
 

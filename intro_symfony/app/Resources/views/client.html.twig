@@ -9,6 +9,10 @@
     border: 1px #555 solid;
     border-radius: 4px
   }
+  .custom-active {
+    background-color: orange !important;
+    color: white
+  }
   </style>
 {% endblock %}
 
@@ -21,9 +25,13 @@
   <button id="btnListFruits" type="button">liste des fruits</button>
   Afficher en tant que
   <select id="selectFormat">
-    <option value="list">Liste</option>
     <option value="table">Tableau</option>
+    <option value="list">Liste</option>
   </select>
+
+  <input id="cbComestible" type="checkbox" checked>Comestible
+  <input id="cbNotComestible" type="checkbox" checked>Non comestible
+
   <div class="container">
     <div class="row">
       <div class="col-md-8">

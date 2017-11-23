@@ -65,3 +65,17 @@ exemple d'url : http://localhost:8000/fruits/api/details/{id}
 --
 Au changement d'affichage (list ou table), effacer le contenu du div detailFruit
 --
+
+--
+En format list, rendre les li clicables afin de charger les détails
+du fruit concerné dans le div detailFruit
+--
+
+--
+Dans le tableau, lorsqu'un nom de fruit est cliqué, changer l'apparence de la
+ligne (tr) correspondante afin de mettre en évidence le fruit "actif"
+
+Méthodes jQuery suggérées:
+  .parent() : à partir d'un élément ciblé, monte d'un niveau dans le dom
+  .addClass(), removeClass(), .toggleClass(), .css()
+--
