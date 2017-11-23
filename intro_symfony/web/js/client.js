@@ -40,6 +40,7 @@ var ajaxFn = function() {
 }
 
 var ajaxListFruits = function() {
+  fruitDetail.html(''); // "remise à 0" du div fruitDetail
   var format = selectFormat.val(); // format d'affichage sélectionné
   if (app.data.fruits == null) {
     // si les données n'ont pas déjà été stockées on les demande au serveur
@@ -73,7 +74,7 @@ var transformToHtml = function(fruits, type) {
     output += '<ul>';
     // itération sur fruits
     fruits.forEach(function(fruit) {
-      output += '<li>' + fruit.name + '</li>';
+      output += '<li class="fruitName" id="'+fruit.id+'">' + fruit.name + '</li>';
     });
     output += '</ul>';
   }
@@ -152,7 +153,13 @@ selectFormat.change(ajaxListFruits);
 // ou à l'un de ses descendants (présent ou à venir)
 // ici: lorsque td.fruitName apparaîtra dans le DOM en tant que descendant
 // de fruitDisplay, un écouteur d'événement click lui sera attaché
-fruitDisplay.on('click', 'td.fruitName', detailFruit);
+
+// fruitDisplay
+//   .on('click', 'td.fruitName', detailFruit)
+//   .on('click', 'li.fruitName', detailFruit);
+
+// équivalent en utilisant uniquement le nom de la classe .fruitName
+fruitDisplay.on('click', '.fruitName', detailFruit)
 
 init();
 

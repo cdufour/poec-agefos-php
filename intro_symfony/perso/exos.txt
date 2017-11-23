@@ -61,3 +61,7 @@ Le clic sur le nom du fruit doit envoyer une requête ajax au serveur
 l'identifiant du fruit devra figurer dans la requête
 exemple d'url : http://localhost:8000/fruits/api/details/{id}
 --
+
+--
+Au changement d'affichage (list ou table), effacer le contenu du div detailFruit
+--
