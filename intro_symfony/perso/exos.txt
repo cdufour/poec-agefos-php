@@ -83,3 +83,19 @@ Méthodes jQuery suggérées:
 --
 Rechercher la chaîne saisie également dans la propriété .origin
 --
+
+--
+Ajouter une colonne dans le tableau de fruits côté client
+Placer dans cette colonne une icône de pouce levé (thumbup)
+Le clic sur cette icône enverra une requête ajax post
+vers l'adresse suivante : /fruits/api/like
+
+En base de données, vous devrez incrémenter le nombre de "like"
+associés au fruit concerné (ajouter une propriété "like" à
+l'entité Fruit)
+
+Le nombre de "like" apparaîtra entre parenthèses à côté de l'icône
+
+Au rafraîchissement de la page client, le nombre de "like" enregistrés
+pour chaque fruit devra être affiché
+--
