@@ -79,3 +79,7 @@ Méthodes jQuery suggérées:
   .parent() : à partir d'un élément ciblé, monte d'un niveau dans le dom
   .addClass(), removeClass(), .toggleClass(), .css()
 --
+
+--
+Rechercher la chaîne saisie également dans la propriété .origin
+--

@@ -7,3 +7,24 @@ Thématique au choix (exemple: Equipe de foot, Salle de Cinéma )
 L'applicaton devra proposer:
 - des controllers, des routes, des relations entre entités
 - du crud (des formulaires)
+
+
+*** TP 5: Symfony/ajax ***
+
+Créer une route /fruits/api/search qui renverra un formulaire avec les balises
+suivantes:
+
+- Un select affichant la liste des fruits
+- Une checkbox permettant d'afficher les détails du producteur associé
+au fruit choisi
+- Une checkbox permettant d'afficher les noms des détaillants associés
+au fruit choisi
+- Un bouton submit
+
+Au clic sur le bouton sur submit, envoyer une requête ajax au serveur
+afin d'obtenir les informations choisies dans le formulaire
+
+Aficher la réponse dans le DOM
+
+Bonus: mettre en cache les réponses obtenues afin de ne pas déclencher
+de nouvelles requêtes ajax si une demande identique a déjà été formulée

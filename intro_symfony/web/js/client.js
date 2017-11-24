@@ -17,6 +17,7 @@ var selectFormat          = appHtml.find('select#selectFormat');
 var fruitDetail           = appHtml.find('div#fruitDetail');
 var cbComestible          = appHtml.find('input#cbComestible');
 var cbNotComestible       = appHtml.find('input#cbNotComestible');
+var search                = appHtml.find('input#search');
 
 var elemActive            = null;
 
@@ -150,8 +151,8 @@ var displayDetailFruit = function(fruit) {
 }
 
 var filterByComestible = function() {
-  var cb1 = cbComestible.prop('checked');
-  var cb2 = cbNotComestible.prop('checked');
+  var comestibleVisible = cbComestible.prop('checked');
+  var notComestibleVisible = cbNotComestible.prop('checked');
 
   // si la case Comestible n'est pas cochée (checked = false)
   // nous devons retirer du tableau tous les fruits comestibles
@@ -161,19 +162,71 @@ var filterByComestible = function() {
 
   var fruitsFiltered =
     app.data.fruits.filter(function(fruit) {
-      // à compléter
-      return true;
+
+      if (comestibleVisible && notComestibleVisible) return true;
+      if (!comestibleVisible && !notComestibleVisible) return false;
+      if (comestibleVisible && !notComestibleVisible)
+        return fruit.comestible
+      if (!comestibleVisible && notComestibleVisible)
+        return !fruit.comestible
+
+      // return
+      //   (fruit.comestible && comestibleVisible) ||
+      //   (!fruit.comestible && notComestibleVisible);
+      // fonctionne chez certains... Pourquoi ???
+      // github.com/ellorex
+
     });
 
   fruitDisplay.html(transformToHtml(fruitsFiltered, 'table'));
 
 }
 
+var filterByKeyword = function(e) {
+  //console.log(e.key);
+  var input = $(this).val();
+  var fruitsFiltered =
+    app.data.fruits.filter(function(fruit) {
+      var test = true;
+      //test = fruit.name.indexOf(input) !== -1;
+
+      // version base de casse
+      //test = fruit.name.toLowerCase().indexOf(input.toLowerCase()) !== -1;
+      var cond1 = fruit.name.indexOf(input) !== -1;
+      var cond2 = fruit.origin.indexOf(input) !== -1;
+      test = cond1 || cond2;
+
+      return test;
+    });
+
+  // mise à jour du DOM en fonction du filtrage
+  fruitDisplay.html(transformToHtml(fruitsFiltered, 'table'));
+}
+
+var ajaxPost = function() {
+  var url = app.server + '/fruits/api/post';
+
+  // données envoyées au serveur. Elles seront
+  // automatiquement converties en JSON
+  var data = {
+    id: 88,
+    name: search.val(),
+    sports: [
+      {id: 1, name: 'Football'},
+      {id: 2, name: 'Tennis'},
+    ]
+  };
+
+  $.post(url, data, function(res) {
+    console.log(res);
+  });
+
+}
 // **************************************************
 
 
 // *** EVENEMENTS ***
-btnTestAjax.click(ajaxFn);
+btnTestAjax.click(ajaxPost);
 btnListFruits.click(ajaxListFruits);
 selectFormat.change(ajaxListFruits);
 
@@ -194,10 +247,9 @@ selectFormat.change(ajaxListFruits);
 
 // équivalent en utilisant uniquement le nom de la classe .fruitName
 fruitDisplay.on('click', '.fruitName', detailFruit);
-
 cbComestible.on('click', filterByComestible);
 cbNotComestible.on('click', filterByComestible);
-
+search.on('keyup', filterByKeyword);
 
 init();
 

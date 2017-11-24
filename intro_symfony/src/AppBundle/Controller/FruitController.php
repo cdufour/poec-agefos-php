@@ -304,9 +304,22 @@ class FruitController extends Controller {
     } else {
       $fruit_assoc['categories'] = null;
     }
-    
+
     $fruit_json = json_encode($fruit_assoc);
     return new Response($fruit_json);
   }
+
+  /**
+   * @Route("/api/post")
+  */
+  public function ajaxPostAction(Request $request) {
+    $name = $request->request->get('name');
+    $sports = $request->request->get('sports');
+
+    return new Response(
+      $name . ' est une experte en '. $sports[0]['name']);
+
+  }
+
 
 }
